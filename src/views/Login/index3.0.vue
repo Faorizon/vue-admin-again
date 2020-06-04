@@ -52,7 +52,7 @@
               <el-input v-model.number="ruleForm.code" minlength="6" maxlength="6"></el-input>
             </el-col>
             <el-col :span="9">
-              <el-button type="success" class="block" @click="getSms">获取验证码</el-button>
+              <el-button type="success" class="block">获取验证码</el-button>
             </el-col>
           </el-row>
         </el-form-item>
@@ -65,7 +65,6 @@
   </div>
 </template>
 <script>
-import login from "@/api/login.js";
 import { reactive, ref, isRef, onMounted } from "@vue/composition-api";
 import {
   stripscript,
@@ -84,12 +83,12 @@ export default {
     // 模块值
     const model = ref("login");
     // 表单的数据
-    const ruleForm = reactive({
-      username: "",
-      password: "",
-      passwords: "",
-      code: ""
-    });
+    const ruleForm= reactive({
+        username: "",
+        password: "",
+        passwords: "",
+        code: ""
+    })
     // 验证用户名
     let validateUsername = (rule, value, callback) => {
       if (value === "") {
@@ -142,14 +141,15 @@ export default {
     };
     //表单的验证
     const rules = reactive({
-      username: [{ validator: validateUsername, trigger: "blur" }],
-      password: [{ validator: validatePassword, trigger: "blur" }],
-      passwords: [{ validator: validatePasswords, trigger: "blur" }],
-      code: [{ validator: validateCode, trigger: "blur" }]
-    });
+        username: [{ validator: validateUsername, trigger: "blur" }],
+        password: [{ validator: validatePassword, trigger: "blur" }],
+        passwords: [{ validator: validatePasswords, trigger: "blur" }],
+        code: [{ validator: validateCode, trigger: "blur" }]
+    })
     /**
      * 申明函数 函数直接普通申明
      */
+    
     const toggleMneu = data => {
       console.log(data);
       menuTab.forEach((elem, index) => {
@@ -160,24 +160,9 @@ export default {
       // 修改模块值
       model.value = data.type;
     };
-    /**
-     * 获取验证码
-    */
-    const getSms=(()=>{
-      let data=({
-        username:ruleForm.username
-      })
-      console.log(data)
-      login.getSms(data)
-    })
-    /**
-     * 提交表单
-    */
     const submitForm = formName => {
       context.refs[formName].validate(valid => {
         if (valid) {
-          login.getSms({});
-
           alert("submit!");
         } else {
           console.log("error submit!!");
@@ -190,20 +175,15 @@ export default {
     // console.log(isRef(menuTab) ? '是基础数据':"是对象类型")
     /**
      * 生命周期
-     */ onMounted(() => {
-
-
-
-     });
-    return {
-      menuTab,
-      model,
-      ruleForm,
-      rules,
-      toggleMneu,
-      submitForm,
-      getSms
-    };
+     */ onMounted(() => {});
+     return {
+       menuTab,
+       model,
+       ruleForm,
+       rules,
+       toggleMneu,
+       submitForm
+     }
   }
 };
 </script>
