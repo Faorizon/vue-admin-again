@@ -17,12 +17,25 @@ export default {
             url:"/getSms/",
             data:data
         })
-    }
+    },
     /**
      * 获取用户角色
      */
-
+    getUserRole(data){
+        return service.request({
+            method:'post',
+            url:"/userRole/",
+            data
+        })
+    },
     /**
-     * 
+     * 注册
      */
+    register(data){
+        return service.request({
+            method:'post',
+            url:"/register/",
+            data
+        })
+    }
 }
