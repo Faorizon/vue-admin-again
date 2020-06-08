@@ -11,6 +11,11 @@ const service = axios.create({
 
 //添加请求拦截器
 service.interceptors.request.use(function(config){
+    //添加请求头
+    config.headers['Tokey']='111111'
+    config.headers['userId']='44444'
+    config.headers['sui']='333'
+
     return config
 },function(error){
     return Promise.reject(error)
